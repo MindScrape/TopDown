@@ -1,0 +1,15 @@
+/// @description Player's create code
+enum PLAYER_STATE {
+	WALKING,
+	TALKING
+}
+
+PLAYER_NAME = "Luke"
+PLAYER_SPEED = 5
+CURRENT_PLAYER_STATE = PLAYER_STATE.WALKING
+
+
+// Dialogue Fields
+DIALOGUE_RANGE = 75
+DIALOGUE_INSTANCE = noone
+DIALOGUE_PLAYER_CAN_TALK = true
