@@ -14,7 +14,10 @@ var square = new Array2(10, 10)
 square.set(4, 4, 5)
 show_debug_message(square.toString())
 */
-
+new Shape().initGpu()
 
 var worldGenerator = new BasicWorldGenerator()
 worldGenerator.buildWorld()
+
+camera = new Camera3()
+block = new Block(16, 16, 100)
