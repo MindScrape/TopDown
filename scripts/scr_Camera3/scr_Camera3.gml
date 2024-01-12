@@ -5,7 +5,7 @@ function Camera3() constructor {
 	direction = 0;
 	x = 200
 	y = 200
-	z = 400
+	z = 2000
 	
 	apply = function() {
 		draw_clear(c_black);

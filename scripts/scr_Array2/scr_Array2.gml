@@ -4,17 +4,17 @@ function Array2(_rows, _columns, _callback_function = noone) : Array1(_rows * _c
 	columns = _columns
 	
 	// @override
-	get = function(_row, _column) {
+	static get = function(_row, _column) {
 		return array[_column * columns + _row]
 	}
 	
 	// @override
-	set = function(_row, _column, _value) {
+	static set = function(_row, _column, _value) {
 		array[_column * columns + _row] = _value
 	}
 	
 	// @override
-	toString = function() {
+	static toString = function() {
 		var stringToReturn = ""
 		for (var i = 0; i < rows; i++) {
 			var stringRow = ""

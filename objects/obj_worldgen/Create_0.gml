@@ -1,23 +1,27 @@
 /// @description Builds the initial world
 
-/*
-var vectorOne = new Vector2(5, 6)
-var vectorTwo = new Vector2(10, 11)
-var vectorThree = vectorOne.add(vectorTwo)
-show_debug_message(vectorThree.toString())
+// DEFINE THE GLOBAL VARIABLES
+global.UV_BLOCK_TEXTURES = new InitializeBlockTextureActivity()
 
-var cube = new Array3(3, 10, 3)
-cube.set(1, 1, 1, 5)
-show_debug_message(cube.toString())
 
-var square = new Array2(10, 10)
-square.set(4, 4, 5)
-show_debug_message(square.toString())
-*/
-new Shape().initGpu()
+// INITIALIZE ANYTHING THAT IS REQUIRED TO RUN THE GAME
+new Shape().initGpu()											// Initialize the GPU to draw graphics
+global.UV_BLOCK_TEXTURES.initUvBlockTextures()					// Initialize the block textures
+
+// GENERATE THE WORLD
 
 var worldGenerator = new BasicWorldGenerator()
-worldGenerator.buildWorld()
+worldGenerator.buildWorld(true)
 
+
+// CREATE THE CAMERA
 camera = new Camera3()
-block = new Block(16, 16, 100)
+
+
+/*
+for (var i = 1; i < 5; i++) {
+	for (var j = 1; j < 5; j++) {
+		new Block(i, j, i, i).render()
+	}
+}
+*/

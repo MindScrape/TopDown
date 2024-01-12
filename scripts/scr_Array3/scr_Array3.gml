@@ -5,17 +5,17 @@ function Array3(_rows, _columns, _breadth, _callback_function = noone) : Array1(
 	breadth = _breadth
 	
 	// @override
-	get = function(_row, _column, _breadth) {
+	static get = function(_row, _column, _breadth) {
 		return array[((_row * columns) * breadth) + (_column * breadth) + _breadth]
 	}
 	
 	// @override
-	set = function(_row, _column, _breadth, _value) {
+	static set = function(_row, _column, _breadth, _value) {
 		array[((_row * columns) * breadth) + (_column * breadth) + _breadth] = _value
 	}
 	
 	// @override
-	toString = function() {
+	static toString = function() {
 		var stringToReturn = ""
 		for (var j = 0; j < columns; j++) {
 			var stringLayer = ""
