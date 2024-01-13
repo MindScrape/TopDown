@@ -178,6 +178,7 @@ function LoadObject() : Shape() constructor {
 		// End the vertex buffer, destroy the lists, close the text file and return the vertex buffer
 
 		vertex_end(model);
+		vertex_freeze(model)
 
 		ds_list_destroy(vertex_x);
 		ds_list_destroy(vertex_y);

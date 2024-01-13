@@ -62,7 +62,7 @@ function BasicWorldGenerator() constructor {
 						var bottom = tempData.get(_x, _y, _z - 1)
 						
 						if (front == 0 or back == 0 or left == 0 or right == 0 or top == 0 or bottom == 0) {
-							new Block(_x, _y, _z, block).render()
+							global.BLOCK_DRAWER.drawBlock(_x, _y, _z, block)
 						}
 					}
 				}
