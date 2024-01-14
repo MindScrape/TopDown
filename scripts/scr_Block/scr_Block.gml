@@ -16,7 +16,8 @@ function InitializeBlockModelsActivity() constructor {
 		for (var blockId = 0; blockId < uvBlockTextures.numBlockTypes; blockId++) {
 			var uvBlockTextureItem = uvBlockTextures.get(blockId)
 			if typeof(uvBlockTextureItem) == "struct" {
-				blockModels.set(blockId, new LoadObject().loadBlock(uvBlockTextureItem))
+				var blockFormats = new LoadObject().loadBlock(uvBlockTextureItem)
+				blockModels.set(blockId, blockFormats.get(0b111111))
 			} 
 		}
 	}
