@@ -3,6 +3,9 @@
 // This is really ugly code right now, but it gets the job done
 function LoadObject() : Shape() constructor {
 
+	// This is incredibly inefficient if we want to cull edges...
+	// Step #1: We need to hard code drawing the blocks (?)
+	// Step #2: We need to implement block face culling....
 	static loadBlock = function(uvBlockTextureItem) {
 		
 		var filename = uvBlockTextureItem.blockType + ".obj"
@@ -10,7 +13,7 @@ function LoadObject() : Shape() constructor {
 		var uOffset = uvBlockTextureItem.uOffset
 		var vOffset = uvBlockTextureItem.vOffset
 
-		var obj_file = file_text_open_read(filename);
+		var obj_file = file_text_open_read(filename); 
 		var mtl_file = file_text_open_read(mtlname);
 
 		var mtl_name = "None";
@@ -178,7 +181,7 @@ function LoadObject() : Shape() constructor {
 		// End the vertex buffer, destroy the lists, close the text file and return the vertex buffer
 
 		vertex_end(model);
-		vertex_freeze(model)
+		vertex_freeze(model) // We can freeze the buffer so that we send it to the GPU once.
 
 		ds_list_destroy(vertex_x);
 		ds_list_destroy(vertex_y);

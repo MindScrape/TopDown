@@ -1,5 +1,7 @@
+
 function InitializeBlockModelsActivity() constructor {
 	// Will be initialized as a 1D array storing all the block models
+	// TODO: We may need to initialize different model variations for block face culling.
 	static blockModels = noone
 	static blockLength = 32
 	
@@ -26,8 +28,8 @@ function InitializeBlockModelsActivity() constructor {
 	}
 }
 
-// I think the only approach to get this to work properly is to initialize this
-// constructor as a global variable.... ugly... I know.... 
+// Gets the UV texture coordinates for every type of block ID. 
+// For now, I rely on this function to define the different blocks in the game.
 function InitializeBlockTextureActivity() constructor {
 	
 	static uvBlockTextures = pointer_null

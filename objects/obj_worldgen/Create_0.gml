@@ -9,9 +9,10 @@ global.BLOCK_DRAWER.initBlockModels()							// Initialize the block models
 
 // GENERATE THE WORLD
 
-var worldGenerator = new BasicWorldGenerator()
-worldGenerator.buildWorld(true)
+//var worldGenerator = new BasicWorldGenerator()
+//worldGenerator.buildWorld(true)
+global.BLOCK_DRAWER.drawBlock(0,0,0,1)
 
 
 // CREATE THE CAMERA
-camera = new Camera3()
+camera = new Camera3(100, 100, 100)

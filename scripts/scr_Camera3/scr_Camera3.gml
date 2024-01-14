@@ -1,11 +1,11 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function Camera3() constructor {
+function Camera3(_startPosX, _startPosY, _startPosZ) constructor {
 	pitch = 0;
 	direction = 0;
-	x = 200
-	y = 200
-	z = 2000
+	x = _startPosX
+	y = _startPosY
+	z = _startPosZ
 	
 	apply = function() {
 		draw_clear(c_black);
