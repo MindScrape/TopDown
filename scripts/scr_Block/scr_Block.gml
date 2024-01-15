@@ -17,15 +17,37 @@ function InitializeBlockModelsActivity() constructor {
 			var uvBlockTextureItem = uvBlockTextures.get(blockId)
 			if typeof(uvBlockTextureItem) == "struct" {
 				var blockFormats = new LoadObject().loadBlock(uvBlockTextureItem)
-				blockModels.set(blockId, blockFormats.get(0b111111))
+				blockModels.set(blockId, blockFormats)
 			} 
 		}
 	}
 	
-	static drawBlock = function(_xPos, _yPos, _zPos, _blockId = 1) {
+	// This function creates the block in the gamemworld. It draws it.
+	/*
+	# Vertices:                        Faces:
+	#      f-------g                          +-------+ 
+	#     /.      /|                         /.  5   /|  3 back
+	#    / .     / |                        / .     / |
+	#   e-------h  |                   2   +-------+ 1|
+	#   |  b . .|. c      z          right |  . . .|. +
+	#   | .     | /       | /y             | . 4   | /
+	#   |.      |/        |/               |.      |/
+	#   a-------d         +---- x          +-------+
+	#                                           6
+	#                                        bottom
+	#
+	# 0b111111 is a 6 bit binary number where each bit represents a face of the cube
+	# It is represented in this order: TOP, BOTTOM, A, B, C, D, where 1 is drawn and 0 is not drawn.
+	*/
+	static drawBlock = function(_xPos, _yPos, _zPos, _blockId = 1, _faces = 0b111111) {
 		var block = instance_create_depth(_xPos * blockLength, _yPos * blockLength, 0, obj_gameObject)
 		block.z = _zPos * blockLength
-		block.model = blockModels.get(_blockId)
+		block.model = blockModels.get(_blockId).get(_faces)
+	}
+	
+	// TODO make _gameWorld its own struct or constructor
+	static placeBlock = function(_gameWorld, _xPos, _yPos, _zPos, _blockId = 1) {
+		// FILL THIS OUT, SUCH THAT GAMEWORLD CAN TAKE IN ANY X,Y,Z POS WITHOUT WORRYING ABOUT OUT OF BOUNDS ERRORS
 	}
 }
 
