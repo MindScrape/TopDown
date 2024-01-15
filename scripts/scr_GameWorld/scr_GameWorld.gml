@@ -7,4 +7,5 @@ function GameWorld() constructor {
 	
 	static mapLen = 32
 	
+	static blockIdForUnknownLookups = 0
 }

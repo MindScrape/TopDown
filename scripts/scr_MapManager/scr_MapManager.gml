@@ -6,7 +6,7 @@ function MapManager() constructor {
 	// Creates a brand new allocated piece of memory for the player at 0,0
 	static initGameWorld = function() {
 		if (maps != pointer_null) {
-			show_message("FATAL ERROR: MapManager initialized a new world while there is already world data loaded. Aborting.")
+			show_message("FATAL ERROR: MapManager initialized a new world while there is world data loaded. Aborting.")
 			saveGame()
 			game_end()
 		}
@@ -19,7 +19,7 @@ function MapManager() constructor {
 	static getKey = function(xPos, yPos) {
 		var _iPos = xPos / (mapLen * chunkXlen)
 		var _jPos = yPos / (mapLen * chunkYlen)
-		var _key = (int64(iPos) << 32) && int64(jPos)
+		var _key = (int64(iPos) << 32) & int64(jPos)
 		return {
 			key : _key,
 			iPos : _iPos,
