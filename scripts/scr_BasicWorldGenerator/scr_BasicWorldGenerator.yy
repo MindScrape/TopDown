@@ -5,7 +5,7 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "worldgen_formulas",
-    "path": "folders/Scripts/worldgen/worldgen_formulas.yy",
+    "name": "world",
+    "path": "folders/Scripts/worldgen/world.yy",
   },
 }

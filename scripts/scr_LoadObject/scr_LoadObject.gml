@@ -166,12 +166,6 @@ function LoadObject() : Shape() constructor {
 						var t = _yy;
 						_yy = _zz;
 						_zz = t;
-				
-						// Add the data to the vertex buffers
-						//vertex_position_3d(model, xx, yy, zz);
-						//vertex_normal(model, nx, ny, nz);
-						//vertex_color(model, color, alpha);
-						//vertex_texcoord(model, xtex, ytex);
 						
 						// Store the values of our block so that we can create all permutations of it.
 						ds_list_add(face_list, {

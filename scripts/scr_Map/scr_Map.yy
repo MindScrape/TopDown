@@ -6,6 +6,6 @@
   "isCompatibility": false,
   "parent": {
     "name": "GameWorld",
-    "path": "folders/Scripts/worldgen/worldgen_formulas/GameWorld.yy",
+    "path": "folders/Scripts/worldgen/world/GameWorld.yy",
   },
 }

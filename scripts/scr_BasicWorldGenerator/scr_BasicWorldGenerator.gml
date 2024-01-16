@@ -2,14 +2,11 @@
 
 function BasicWorldGenerator() constructor {
 	chunkSize = new Vector3(16, 16, 256)
-	//noiseScale = new Vector2(1.0, 1.0)
-	//noiseOffset = new Vector2(0.0, 0.0)
 	
 	heightOffset = 60
 	heightIntensity = 5.0
-	tempData = new ChunkArray(chunkSize.posX, chunkSize.posY, chunkSize.posZ)
 	
-	buildWorld = function(render = false) {
+	static buildWorld = function(render = false) {
 		shader_set_perlin_noise(150)
 		for (var _x = 0; _x < chunkSize.posX; _x++) {
 			for (var _y = 0; _y < chunkSize.posY; _y++) {
@@ -37,34 +34,7 @@ function BasicWorldGenerator() constructor {
 					else if _z == 0 {
 						blockTypeToAssign = 4
 					}
-					tempData.set(_x, _y, _z, blockTypeToAssign)
-				}
-			}
-		}
-		//show_debug_message(tempData.toString())
-		if (render) {
-			for (var _x = 0; _x < chunkSize.posX; _x++) {
-				for (var _y = 0; _y < chunkSize.posY; _y++) {
-					for (var _z = 0; _z < chunkSize.posZ; _z++) {
-						
-						var block = tempData.get(_x, _y, _z)
-						if block == 0 {
-							continue
-						}
-						
-						// Naive approach to rendering the block
-						
-						var front = tempData.get(_x, _y + 1, _z)
-						var back = tempData.get(_x, _y + 1, _z)
-						var left = tempData.get(_x - 1, _y, _z)
-						var right = tempData.get(_x, _y + 1, _z)
-						var top = tempData.get(_x, _y, _z + 1)
-						var bottom = tempData.get(_x, _y, _z - 1)
-						
-						if (front == 0 or back == 0 or left == 0 or right == 0 or top == 0 or bottom == 0) {
-							global.BLOCK_DRAWER.drawBlock(_x, _y, _z, block)
-						}
-					}
+					worldData.writeBlock(_x, _y, _z, blockTypeToAssign)
 				}
 			}
 		}

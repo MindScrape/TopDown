@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_Chunk",
+  "name": "scr_MapMemManager",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {

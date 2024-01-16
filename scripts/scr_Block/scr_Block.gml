@@ -10,8 +10,7 @@ function InitializeBlockModelsActivity() constructor {
 			show_message("blockModels has already been initialized. Doing this more than once is a fatal bug and will cause slow downs. Skipping...")
 			return
 		}
-		var uvBlockTextures = new InitializeBlockTextureActivity()
-		uvBlockTextures.initUvBlockTextures()
+		var uvBlockTextures = new InitializeBlockTextureActivity().initUvBlockTextures()
 		blockModels = new Array1(uvBlockTextures.numBlockTypes)
 		for (var blockId = 0; blockId < uvBlockTextures.numBlockTypes; blockId++) {
 			var uvBlockTextureItem = uvBlockTextures.get(blockId)
@@ -20,6 +19,7 @@ function InitializeBlockModelsActivity() constructor {
 				blockModels.set(blockId, blockFormats)
 			} 
 		}
+		return self
 	}
 	
 	// This function creates the block in the gamemworld. It draws it.
@@ -42,6 +42,7 @@ function InitializeBlockModelsActivity() constructor {
 	static drawBlock = function(_xPos, _yPos, _zPos, _blockId = 1, _faces = 0b111111) {
 		var block = instance_create_depth(_xPos * blockLength, _yPos * blockLength, 0, obj_gameObject)
 		block.z = _zPos * blockLength
+		block.blockId = _blockId
 		block.model = blockModels.get(_blockId).get(_faces)
 	}
 	
@@ -74,6 +75,7 @@ function InitializeBlockTextureActivity() constructor {
 		uvBlockTextures.set(2, 1, __initUvBlockTextureItem(2, 0, 0))		// dirt
 		uvBlockTextures.set(3, 1, __initUvBlockTextureItem(2, 0, 1))		// stone
 		uvBlockTextures.set(4, 1, __initUvBlockTextureItem(2, 1, 1))		// bedrock
+		return self
 	}
 	
 	// Returns an item that will populate 

@@ -6,6 +6,7 @@ function GameWorld() constructor {
 	static chunkZlen = 256
 	
 	static mapLen = 32
+	static mapCacheSize = 5
 	
-	static blockIdForUnknownLookups = 0
+	static defaultValueForUnknownLookups = 0
 }
