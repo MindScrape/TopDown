@@ -1,5 +1,4 @@
 // Originally implemented this cache for the MMM
-// UNTESTED
 function Cache(_size) constructor {
 	
 	size = _size
@@ -9,7 +8,6 @@ function Cache(_size) constructor {
 		for (var i = 0; i < size; i++) {
 			var item = ds_list_find_value(self.cache, i)
 			if item != undefined and item.key == _key {
-				show_message("CACHE HIT")
 				__reset(item, i)
 				return item.value
 			} 

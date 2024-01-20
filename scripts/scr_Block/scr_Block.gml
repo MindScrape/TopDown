@@ -1,5 +1,5 @@
 
-function InitializeBlockModelsActivity() constructor {
+function BlockDrawer() constructor {
 	// Will be initialized as a 1D array storing all the block models
 	// TODO: We may need to initialize different model variations for block face culling.
 	static blockModels = noone
@@ -22,33 +22,34 @@ function InitializeBlockModelsActivity() constructor {
 		return self
 	}
 	
-	// This function creates the block in the gamemworld. It draws it.
 	/*
 	# Vertices:                        Faces:
 	#      f-------g                          +-------+ 
-	#     /.      /|                         /.  5   /|  3 back
+	#     /.      /|                         /.  TOP /|  B
 	#    / .     / |                        / .     / |
-	#   e-------h  |                   2   +-------+ 1|
-	#   |  b . .|. c      z          right |  . . .|. +
-	#   | .     | /       | /y             | . 4   | /
+	#   e-------h  |                   C   +-------+ A|
+	#   |  b . .|. c      +z               |  . . .|. +
+	#   | .     | /       | /-y            | . D   | /
 	#   |.      |/        |/               |.      |/
-	#   a-------d         +---- x          +-------+
-	#                                           6
-	#                                        bottom
+	#   a-------d         +---- +x         +-------+
+	#                                        BOTTOM
+	#                                        
 	#
 	# 0b111111 is a 6 bit binary number where each bit represents a face of the cube
 	# It is represented in this order: TOP, BOTTOM, A, B, C, D, where 1 is drawn and 0 is not drawn.
 	*/
 	static drawBlock = function(_xPos, _yPos, _zPos, _blockId = 1, _faces = 0b111111) {
-		var block = instance_create_depth(_xPos * blockLength, _yPos * blockLength, 0, obj_gameObject)
-		block.z = _zPos * blockLength
-		block.blockId = _blockId
-		block.model = blockModels.get(_blockId).get(_faces)
+		var blockInstance = instance_create_depth(_xPos * blockLength, _yPos * blockLength, 0, obj_gameObject)
+		blockInstance.z = _zPos * blockLength
+		blockInstance.blockId = _blockId
+		blockInstance.faces = _faces
+		blockInstance.model = blockModels.get(_blockId).get(_faces)
+		return blockInstance
 	}
-	
-	// TODO make _gameWorld its own struct or constructor
-	static placeBlock = function(_gameWorld, _xPos, _yPos, _zPos, _blockId = 1) {
-		// FILL THIS OUT, SUCH THAT GAMEWORLD CAN TAKE IN ANY X,Y,Z POS WITHOUT WORRYING ABOUT OUT OF BOUNDS ERRORS
+
+	// Use this function to redraw the block to have more or less faces.
+	static redrawBlock = function(_blockInstance, _faces) {
+		_blockInstance.model = blockModels.get(_blockInstance.blockId).get(_faces)
 	}
 }
 
