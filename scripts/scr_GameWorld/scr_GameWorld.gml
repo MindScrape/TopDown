@@ -8,5 +8,5 @@ function GameWorld() constructor {
 	static mapLen = 32
 	static mapCacheSize = 5
 	
-	static defaultValueForUnknownLookups = 0
+	static defaultValueForUnknownLookups = pointer_null
 }
