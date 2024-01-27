@@ -250,6 +250,16 @@ function LoadObject() : Shape() constructor {
 			vertex_freeze(model)
 			blockFormats.set(i, model)
 		}
+		
+		// Set the 0th index to an empty vbuffer.
+		/*
+		THIS IS A HACK AND WE NEED TO FIND A WAY TO PREVENT THE OBJ FROM DRAWING IN THE FIRST PLACE.
+		*/
+		//var model = vertex_create_buffer();
+		//vertex_begin(model, format);
+		//vertex_end(model);
+		//vertex_freeze(model)
+		//blockFormats.set(0b0, model)
 
 		// Destroy the lists, close the text file and return the vertex buffer
 

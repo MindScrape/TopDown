@@ -8,6 +8,9 @@ function Chunk() : GameWorld() constructor {
 	}
 	
 	static get = function(xPos, yPos, zPos) {
+		if (zPos < 0 || zPos > chunkZlen) {
+			return airValueForUntouchableLookups
+		}
 		return blocks.get(abs(xPos), abs(yPos), zPos)
 	}
 	

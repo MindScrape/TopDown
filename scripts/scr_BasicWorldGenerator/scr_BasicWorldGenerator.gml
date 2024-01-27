@@ -1,12 +1,16 @@
 // Testing world generation
 
-function BasicWorldGenerator() constructor {
-	chunkSize = new Vector3(16, 16, 256)
+function BasicWorldGenerator(_mmm, _blockDrawer) constructor {
 	
+	mmm = _mmm
+	blockDrawer = _blockDrawer
+	placeBlockAction = new PlaceBlock(_mmm, _blockDrawer)
+	
+	chunkSize = new Vector3(16, 16, 256)
 	heightOffset = 60
 	heightIntensity = 5.0
 	
-	static buildWorld = function(render = false) {
+	static buildWorld = function() {
 		shader_set_perlin_noise(150)
 		for (var _x = 0; _x < chunkSize.posX; _x++) {
 			for (var _y = 0; _y < chunkSize.posY; _y++) {
@@ -34,7 +38,7 @@ function BasicWorldGenerator() constructor {
 					else if _z == 0 {
 						blockTypeToAssign = 4
 					}
-					worldData.writeBlock(_x, _y, _z, blockTypeToAssign)
+					placeBlockAction.placeBlock(_x, _y, _z, blockTypeToAssign)
 				}
 			}
 		}

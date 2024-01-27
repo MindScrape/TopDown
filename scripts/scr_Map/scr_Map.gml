@@ -11,12 +11,12 @@ function Map(_iPos, _jPos): GameWorld() constructor {
 	static __convertXYtoIJ = function(xPos, yPos) {
 		xPos = abs(xPos)
 		yPos = abs(yPos)
-		var iPos = 0
-		var jPos = 0
-		var iDenominator = chunkXlen * abs(map.iPos)
-		var jDenominator = chunkYlen * abs(map.jPos)
-		if (iDenominator != 0) iPos = floor(xPos / iDenominator)
-		if (jDenominator != 0) jPos = floor(yPos / jDenominator)
+		var iNumerator = floor(xPos / chunkXlen)
+		var jNumerator = floor(yPos / chunkYlen)
+		var iDenominator = map.iPos < 0 ? map.iPos + 2 : map.iPos + 1
+		var jDenominator = map.jPos < 0 ? map.jPos + 2 : map.jPos + 1
+		var iPos =  floor(iNumerator / iDenominator)
+		var jPos =  floor(jNumerator / jDenominator)
 		return {
 			iPos : iPos,
 			jPos : jPos
@@ -46,8 +46,8 @@ function Map(_iPos, _jPos): GameWorld() constructor {
 	static readBlock = function(xPos, yPos, zPos) {
 		var chunk = getChunk(xPos, yPos)
 		if chunk == 0 {
-			show_debug_message("Map is attempting to read from a chunk that does not exist yet. Returning default value for unknown lookups.")
-			return defaultValueForUnknownLookups
+			show_debug_message("Map is attempting to read from a chunk that does not exist yet. Returning null value for unknown lookups.")
+			return nullValueForUnknownLookups
 		}
 		return chunk.get(xPos, yPos, zPos)
 	}

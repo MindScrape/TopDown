@@ -4,3 +4,4 @@ self.blockId = -1;
 self.model = -1;
 self.faces = 0b111111;
 self.z = 16;
+self.cullable = true

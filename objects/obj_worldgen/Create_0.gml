@@ -4,24 +4,19 @@
 
 
 // INITIALIZE ANYTHING ELSE THAT IS REQUIRED TO RUN THE GAME
-new Shape().initGpu()										// Initialize the GPU to draw graphics				
-
-// GENERATE THE WORLD
-
-// var worldGenerator = new BasicWorldGenerator()
-// worldGenerator.buildWorld(true)
-
-
-
+new Shape().initGpu()					// Initialize the GPU to draw graphics				
 
 blockMap = new MapMemManager().initMapManager()
 blockDrawer = new BlockDrawer().initBlockModels()	
 
 placeBlockAction = new PlaceBlock(blockMap, blockDrawer)
-placeBlockAction.placeBlock(0, 0, 0, 1)
-placeBlockAction.placeBlock(0, 1, 0, 1)
 
+genX = 0
+genY = 0
 
+// GENERATE THE WORLD
+//var worldGenerator = new BasicWorldGenerator(blockMap, blockDrawer)
+//worldGenerator.buildWorld()
 
 
 

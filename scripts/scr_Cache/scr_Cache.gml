@@ -8,7 +8,9 @@ function Cache(_size) constructor {
 		for (var i = 0; i < size; i++) {
 			var item = ds_list_find_value(self.cache, i)
 			if item != undefined and item.key == _key {
-				__reset(item, i)
+				if i != 0 {
+					__reset(item, i)
+				}
 				return item.value
 			} 
 		}

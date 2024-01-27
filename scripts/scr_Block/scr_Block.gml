@@ -16,6 +16,7 @@ function BlockDrawer() constructor {
 			var uvBlockTextureItem = uvBlockTextures.get(blockId)
 			if typeof(uvBlockTextureItem) == "struct" {
 				var blockFormats = new LoadObject().loadBlock(uvBlockTextureItem)
+				
 				blockModels.set(blockId, blockFormats)
 			} 
 		}
@@ -43,13 +44,21 @@ function BlockDrawer() constructor {
 		blockInstance.z = _zPos * blockLength
 		blockInstance.blockId = _blockId
 		blockInstance.faces = _faces
+		blockInstance.cullable = true // For now all blocks will be cullable. ONLY SPECIAL BLOCKS WON'T BE
 		blockInstance.model = blockModels.get(_blockId).get(_faces)
 		return blockInstance
 	}
 
 	// Use this function to redraw the block to have more or less faces.
+	// We should unload the block if there are no faces showing	
 	static redrawBlock = function(_blockInstance, _faces) {
+		_blockInstance.faces = _faces
 		_blockInstance.model = blockModels.get(_blockInstance.blockId).get(_faces)
+		if _faces == 0b000000 {
+			instance_deactivate_object(_blockInstance)
+		} else {
+			instance_activate_object(_blockInstance)
+		}
 	}
 }
 

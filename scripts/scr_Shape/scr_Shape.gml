@@ -9,6 +9,8 @@ function Shape() constructor {
 		}
 		gpu_set_ztestenable(true)
 		gpu_set_zwriteenable(true)
+		gpu_set_cullmode(cull_clockwise)
+		//gpu_set_fog(true, c_black, 200, 300);
 		hasInitializedGpu = true
 	}
 	

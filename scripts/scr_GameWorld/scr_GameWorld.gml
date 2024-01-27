@@ -4,9 +4,13 @@ function GameWorld() constructor {
 	static chunkXlen = 16
 	static chunkYlen = 16
 	static chunkZlen = 256
-	
+
 	static mapLen = 32
 	static mapCacheSize = 5
 	
-	static defaultValueForUnknownLookups = 0
+	// For blocks that are untouchable but seeable, we want it to be air
+	static airValueForUntouchableLookups = 0
+	
+	// For chunks that we have loaded but have never written to, return -1
+	static nullValueForUnknownLookups = 0
 }
