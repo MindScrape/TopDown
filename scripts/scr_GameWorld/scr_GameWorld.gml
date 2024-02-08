@@ -9,8 +9,8 @@ function GameWorld() constructor {
 	static mapCacheSize = 5
 	
 	// For blocks that are untouchable but seeable, we want it to be air
-	static airValueForUntouchableLookups = 0
+	static airValueForUntouchableLookups = BLOCK.AIR
 	
-	// For chunks that we have loaded but have never written to, return -1
+	// For chunks that we have loaded but have never written to
 	static nullValueForUnknownLookups = 0
 }

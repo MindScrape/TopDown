@@ -2,14 +2,25 @@
 
 // This is really ugly code right now, but it gets the job done
 function LoadObject() : Shape() constructor {
+	
+	static blockTextureStyleToFileName = function(blockTextureStyle) {
+		switch (blockTextureStyle) {
+			case BLOCK_TEXTURE_STYLE.SUSHI:
+				return "normalBlock1"
+			case BLOCK_TEXTURE_STYLE.SINGLE:
+				return "normalBlock2"
+			default:
+				return "normalBlock2"
+		}
+	}
 
 	// This is incredibly inefficient if we want to cull edges...
 	// Step #1: We need to hard code drawing the blocks (?)
 	// Step #2: We need to implement block face culling....
 	static loadBlock = function(uvBlockTextureItem) {
 		
-		var filename = uvBlockTextureItem.blockType + ".obj"
-		var mtlname = uvBlockTextureItem.blockType + ".mtl"
+		var filename = self.blockTextureStyleToFileName(uvBlockTextureItem.blockType) + ".obj"
+		var mtlname = self.blockTextureStyleToFileName(uvBlockTextureItem.blockType) + ".mtl"
 		var uOffset = uvBlockTextureItem.uOffset
 		var vOffset = uvBlockTextureItem.vOffset
 		

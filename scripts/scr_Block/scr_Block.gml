@@ -1,4 +1,17 @@
+enum BLOCK {
+	AIR     = 0,
+	GRASS   = 1,
+	DIRT    = 2,
+	STONE   = 3,
+	BEDROCK = 4
+}
 
+enum BLOCK_TEXTURE_STYLE {
+	SUSHI  = 0, 	// Like the grass block
+	SINGLE = 1  	// Like the dirt block
+}
+
+// Draws and erases blocks from the gameworld.
 function BlockDrawer() constructor {
 	// Will be initialized as a 1D array storing all the block models
 	// TODO: We may need to initialize different model variations for block face culling.
@@ -12,7 +25,7 @@ function BlockDrawer() constructor {
 		}
 		var uvBlockTextures = new InitializeBlockTextureActivity().initUvBlockTextures()
 		blockModels = new Array1(uvBlockTextures.numBlockTypes)
-		for (var blockId = 0; blockId < uvBlockTextures.numBlockTypes; blockId++) {
+		for (var blockId = BLOCK.AIR; blockId < uvBlockTextures.numBlockTypes; blockId++) {
 			var uvBlockTextureItem = uvBlockTextures.get(blockId)
 			if typeof(uvBlockTextureItem) == "struct" {
 				var blockFormats = new LoadObject().loadBlock(uvBlockTextureItem)
@@ -60,6 +73,13 @@ function BlockDrawer() constructor {
 			instance_activate_object(_blockInstance)
 		}
 	}
+	
+	// Use this function to erase the block from the gameworld.
+	// This will DESTROY the instance, and the MMM will reference a STALE block.
+	// This means we must be diligent to update the MMM after calling this function.
+	static eraseBlock = function(_blockInstance) {
+		instance_destroy(_blockInstance)
+	}
 }
 
 // Gets the UV texture coordinates for every type of block ID. 
@@ -71,7 +91,7 @@ function InitializeBlockTextureActivity() constructor {
 	static numBlockTypes = 10
 	
 	static get = function(_blockId) {
-		return uvBlockTextures.get(_blockId, 1)
+		return uvBlockTextures.get(_blockId)
 	}
 	
 	static initUvBlockTextures = function() { 
@@ -80,31 +100,19 @@ function InitializeBlockTextureActivity() constructor {
 			return
 		}
 		// I probably should move these hardcoded values to some data file later on...
-		uvBlockTextures = new Array2(numBlockTypes, 2)
-		uvBlockTextures.set(1, 1, __initUvBlockTextureItem(1, 0, 0))		// grass
-		uvBlockTextures.set(2, 1, __initUvBlockTextureItem(2, 0, 0))		// dirt
-		uvBlockTextures.set(3, 1, __initUvBlockTextureItem(2, 0, 1))		// stone
-		uvBlockTextures.set(4, 1, __initUvBlockTextureItem(2, 1, 1))		// bedrock
+		// Basically this SHOULD be a 1D array where the index is the block ID and the element is the UV texture item.
+		uvBlockTextures = new Array1(numBlockTypes)
+		uvBlockTextures.set(BLOCK.GRASS,    __initUvBlockTextureItem(BLOCK_TEXTURE_STYLE.SUSHI,  0, 0))
+		uvBlockTextures.set(BLOCK.DIRT,     __initUvBlockTextureItem(BLOCK_TEXTURE_STYLE.SINGLE, 0, 0))
+		uvBlockTextures.set(BLOCK.STONE,    __initUvBlockTextureItem(BLOCK_TEXTURE_STYLE.SINGLE, 0, 1))
+		uvBlockTextures.set(BLOCK.BEDROCK,  __initUvBlockTextureItem(BLOCK_TEXTURE_STYLE.SINGLE, 1, 1))
 		return self
 	}
 	
-	// Returns an item that will populate 
-	static __initUvBlockTextureItem = function(_blockType = 1, _uOffset = 0, _vOffset = 0) {
-		var blockTypeName;
-		switch (_blockType) {
-			case 1:
-				blockTypeName = "normalBlock1"
-				break
-			case 2:
-				blockTypeName = "normalBlock2"
-				break
-			default:
-				blockTypeName = "normalBlock1"
-				break
-		}
-		
+	// Creates a struct of the data needed to place a texture onto the block.
+	static __initUvBlockTextureItem = function(_blockType = BLOCK_TEXTURE_STYLE.SINGLE, _uOffset = 0, _vOffset = 0) {
 		return {
-			blockType : blockTypeName,
+			blockType : _blockType,
 			uOffset   : _uOffset * uvMagicNumber,
 			vOffset   : _vOffset * uvMagicNumber
 		}

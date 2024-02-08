@@ -19,10 +19,10 @@ function PlaceBlock(_mmm, _blockDrawer) : Action(_mmm, _blockDrawer) constructor
 	#                          BOTTOM
 	*/
 	// The block will draw itself into the world with the appropriate faces,
-	// while at the same time redrawing its neighbors at the same time.
+	// while at the same time redrawing its neighbors.
 	static placeBlock = function(_x, _y, _z, _blockId) {
 		
-		if (_blockId == 0) return; // Player cannot place air for now
+		if (_blockId == BLOCK.AIR) return; // Player cannot place air for now
 		
 		var top	   = mmm.readBlock(_x, _y, _z + 1)
 		var bottom = mmm.readBlock(_x, _y, _z - 1)
@@ -32,16 +32,21 @@ function PlaceBlock(_mmm, _blockDrawer) : Action(_mmm, _blockDrawer) constructor
 		var d      = mmm.readBlock(_x, _y + 1, _z)
 		
 		var faces = 0b111111
-		if (top != 0 and top.blockId != 0)		 {  faces = faces & 0b011111; blockDrawer.redrawBlock(top,    top.faces    ^ 0b010000) } // TOP
-		if (bottom != 0 and bottom.blockId != 0) {  faces = faces & 0b101111; blockDrawer.redrawBlock(bottom, bottom.faces ^ 0b100000) } // BOTTOM
-		if (a != 0 and a.blockId != 0)			 {  faces = faces & 0b110111; blockDrawer.redrawBlock(a,      a.faces      ^ 0b000010) } // A
-		if (b != 0 and b.blockId != 0)			 {  faces = faces & 0b111011; blockDrawer.redrawBlock(b,      b.faces      ^ 0b000001) } // B
-		if (c != 0 and c.blockId != 0)			 {  faces = faces & 0b111101; blockDrawer.redrawBlock(c,      c.faces      ^ 0b001000) } // C
-		if (d != 0 and d.blockId != 0)			 {  faces = faces & 0b111110; blockDrawer.redrawBlock(d,      d.faces      ^ 0b000100) } // D
-		var block = blockDrawer.drawBlock(_x, _y, _z, _blockId, faces)
-		mmm.writeBlock(_x, _y, _z, block)
+		if (top != 0 and top.blockId != BLOCK.AIR)       {  faces = faces & 0b011111;  blockDrawer.redrawBlock(top,    top.faces    ^ 0b010000) } // TOP
+		if (bottom != 0 and bottom.blockId != BLOCK.AIR) {  faces = faces & 0b101111;  blockDrawer.redrawBlock(bottom, bottom.faces ^ 0b100000) } // BOTTOM
+		if (a != 0 and a.blockId != BLOCK.AIR)			 {  faces = faces & 0b110111;  blockDrawer.redrawBlock(a,      a.faces      ^ 0b000010) } // A
+		if (b != 0 and b.blockId != BLOCK.AIR)			 {  faces = faces & 0b111011;  blockDrawer.redrawBlock(b,      b.faces      ^ 0b000001) } // B
+		if (c != 0 and c.blockId != BLOCK.AIR)			 {  faces = faces & 0b111101;  blockDrawer.redrawBlock(c,      c.faces      ^ 0b001000) } // C
+		if (d != 0 and d.blockId != BLOCK.AIR)			 {  faces = faces & 0b111110;  blockDrawer.redrawBlock(d,      d.faces      ^ 0b000100) } // D
+		var block = blockDrawer.drawBlock(_x, _y, _z, _blockId, faces)		// Draw the block into the gameworld
+		mmm.writeBlock(_x, _y, _z, block)									// Record the block into the MMM
 		
-		// TODO: I need to not load in blocks that are on the edges of unloaded chunks. These are just wasted resources the player should never see....
+		
+		
+		
+		
+		
+		// TODO: I need to not load in blocks that are on the edges of unloaded chunks / render distance. These are just wasted resources the player should never see....
 		/*
 		if (top != 0 and (top == -1 or top.blockId != 0))		   {  faces = faces & 0b011111; if (top != -1)    blockDrawer.redrawBlock(top,    top.faces    ^ 0b010000) } // TOP
 		if (bottom != 0 and (bottom == -1 or bottom.blockId != 0)) {  faces = faces & 0b101111; if (bottom != -1) blockDrawer.redrawBlock(bottom, bottom.faces ^ 0b100000) } // BOTTOM

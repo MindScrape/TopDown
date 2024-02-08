@@ -18,11 +18,17 @@ function Camera3(_startPosX, _startPosY, _startPosZ) constructor {
 		with (obj_gameObject) event_perform(ev_draw, 0);
 	}
 	
+	// wraps a value around a certain range
+	normalize = function(value, modulo) {
+		var remainder = (value % modulo);
+		return (remainder < 0) ? (modulo + remainder) : remainder;
+	}
+	
 	freeRoam = function() {
-		// This is pretty much all movement code from 3D in older versions of Game Maker.
-		direction -= (display_mouse_get_x() - display_get_width() / 2) / 10;
+		direction = self.normalize(direction - (display_mouse_get_x() - display_get_width() / 2) / 10, 360);
+		show_debug_message("DIRECTION: " + string(direction))
 		pitch = clamp(pitch - (display_mouse_get_y() - display_get_height() / 2) / 10, -80, 80);
-
+		show_debug_message("PITCH: " + string(pitch))
 		display_mouse_set(display_get_width() / 2, display_get_height() / 2);
 
 		if (keyboard_check(vk_escape)){

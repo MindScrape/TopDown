@@ -5,8 +5,9 @@ camera.freeRoam()
 
 
 if keyboard_check(vk_enter) {
-	
-	var heightGen = round(perlin_noise_2d(genX, genY) * 10.0 + 60)
+	var randHeight = perlin_noise_2d(genX, genY)
+	show_debug_message(instance_number(obj_gameObject))
+	var heightGen = round(randHeight * 10.0 + 60)
 	placeBlockAction.placeBlock(genX, genY, heightGen, 1)
 	for (z = 0; z < heightGen; z++) {
 		placeBlockAction.placeBlock(genX, genY, z, 3)
