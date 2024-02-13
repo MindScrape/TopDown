@@ -46,8 +46,8 @@ function Map(_iPos, _jPos): GameWorld() constructor {
 	static readBlock = function(xPos, yPos, zPos) {
 		var chunk = getChunk(xPos, yPos)
 		if chunk == 0 {
-			//show_debug_message("Map is attempting to read from a chunk that does not exist yet. Returning null value for unknown lookups.")
-			return nullValueForUnknownLookups
+			// Map is attempting to read from a chunk that does not exist yet.
+			return UNINITIALIZED_CHUNK
 		}
 		return chunk.get(xPos, yPos, zPos)
 	}

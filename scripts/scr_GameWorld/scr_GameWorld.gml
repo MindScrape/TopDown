@@ -12,5 +12,5 @@ function GameWorld() constructor {
 	static airValueForUntouchableLookups = BLOCK.AIR
 	
 	// For chunks that we have loaded but have never written to
-	static nullValueForUnknownLookups = 0
+	static UNINITIALIZED_CHUNK = -1
 }

@@ -1,8 +1,9 @@
 // Loads a .obj wavefront model into the world
 
 // This is really ugly code right now, but it gets the job done
+// TODO: Use triangle strips to decrease the number of vertices.
 function LoadObject() : Shape() constructor {
-	
+		
 	static blockTextureStyleToFileName = function(blockTextureStyle) {
 		switch (blockTextureStyle) {
 			case BLOCK_TEXTURE_STYLE.SUSHI:
@@ -14,9 +15,6 @@ function LoadObject() : Shape() constructor {
 		}
 	}
 
-	// This is incredibly inefficient if we want to cull edges...
-	// Step #1: We need to hard code drawing the blocks (?)
-	// Step #2: We need to implement block face culling....
 	static loadBlock = function(uvBlockTextureItem) {
 		
 		var filename = self.blockTextureStyleToFileName(uvBlockTextureItem.blockType) + ".obj"

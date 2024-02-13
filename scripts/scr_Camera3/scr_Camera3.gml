@@ -26,9 +26,9 @@ function Camera3(_startPosX, _startPosY, _startPosZ) constructor {
 	
 	freeRoam = function() {
 		direction = self.normalize(direction - (display_mouse_get_x() - display_get_width() / 2) / 10, 360);
-		show_debug_message("DIRECTION: " + string(direction))
+		//show_debug_message("DIRECTION: " + string(direction))
 		pitch = clamp(pitch - (display_mouse_get_y() - display_get_height() / 2) / 10, -80, 80);
-		show_debug_message("PITCH: " + string(pitch))
+		//show_debug_message("PITCH: " + string(pitch))
 		display_mouse_set(display_get_width() / 2, display_get_height() / 2);
 
 		if (keyboard_check(vk_escape)){

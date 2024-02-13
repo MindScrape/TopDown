@@ -3,7 +3,7 @@
 
 camera.freeRoam()
 
-
+/*
 if keyboard_check(vk_enter) {
 	var randHeight = perlin_noise_2d(genX, genY)
 	show_debug_message(instance_number(obj_gameObject))
@@ -19,3 +19,4 @@ if keyboard_check(vk_enter) {
 		genY += 1
 	}
 }
+*/

@@ -63,7 +63,8 @@ function BlockDrawer() constructor {
 	}
 
 	// Use this function to redraw the block to have more or less faces.
-	// We should unload the block if there are no faces showing	
+	// We should unload the block if there are no faces showing.
+	// Unloaded objects should still be accessible so long as we save the instance ID (See: https://forum.gamemaker.io/index.php?threads/solved-referencing-variables-from-deactivated-instances.65011/)
 	static redrawBlock = function(_blockInstance, _faces) {
 		_blockInstance.faces = _faces
 		_blockInstance.model = blockModels.get(_blockInstance.blockId).get(_faces)

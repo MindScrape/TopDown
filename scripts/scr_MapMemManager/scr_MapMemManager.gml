@@ -1,4 +1,5 @@
 // Map Manager controls access to many different maps in game
+// These calls are expensive, so minimize them as much as possible.
 function MapMemManager() : GameWorld() constructor {
 	
 	maps = pointer_null
@@ -74,7 +75,11 @@ function MapMemManager() : GameWorld() constructor {
 		return map.readBlock(xPos, yPos, zPos)
 	}
 	
-	
+	static getChunk = function(xPos, yPos) {
+		var map = getMap(xPos, yPos)
+		return map.getChunk(xPos, yPos)
+	}
+
 	static saveGame = function() {
 		// Intentionally left empty for now
 	}
