@@ -1,4 +1,5 @@
-Personal Project of Pushing the limits of turning GameMaker Studio 2 into a 3D voxel engine.
+Personal Project of Pushing the limits of turning GameMaker Studio 2 into a 3D voxel engine. 
+Currently it has the foundations, but it needs some debugging and cleaning.
 
 Features:
 - Perlin Noise to make the surface look natural
